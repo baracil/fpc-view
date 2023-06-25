@@ -1,20 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>net.femtoparsec.view</groupId>
-    <artifactId>fpc-view</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
+    <parent>
+        <groupId>net.femtoparsec.view</groupId>
+        <artifactId>fpc-view</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
 
-  <artifactId>fpc-view-api</artifactId>
+    <artifactId>fpc-view-api</artifactId>
 
-  <name>${library.name} - ${module.name}</name>
+    <name>${library.name} - ${module.name}</name>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <module.name>API</module.name>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <module.name>API</module.name>
+    </properties>
 
 </project>

@@ -1,19 +1,25 @@
 package net.femtoparsec.view.api;
 
-public sealed interface LayerItem permits LayerItem.Drawer, LayerItem.Layout {
+import java.awt.*;
 
-  String name();
+public sealed interface LayerItem permits LayerItem.Drawer, LayerItem.Layouter {
+
+  String getName();
 
   default boolean hasName(String name) {
-    return name().equals(name);
+    return this.getName().equals(name);
   }
 
 
   non-sealed interface Drawer extends LayerItem {
 
+    void draw(Graphics2D graphics2D, double width, double height);
+
   }
 
-  non-sealed interface Layout extends LayerItem {
+  non-sealed interface Layouter extends LayerItem {
+
+    Layout layout(Layout layout);
 
   }
 }

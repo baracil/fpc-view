@@ -8,13 +8,13 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>fpc-view-impl</artifactId>
+    <artifactId>fpc-renderer-impl</artifactId>
 
     <name>${library.name} - ${module.name}</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <module.name>View Implementation</module.name>
+        <module.name>Renderer Implementation</module.name>
     </properties>
 
     <dependencies>

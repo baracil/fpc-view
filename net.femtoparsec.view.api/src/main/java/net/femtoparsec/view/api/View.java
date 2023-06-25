@@ -2,28 +2,49 @@ package net.femtoparsec.view.api;
 
 import java.util.List;
 import java.util.ServiceLoader;
-import java.util.function.UnaryOperator;
 
 public interface View {
 
-  List<Layer> getLayers();
+  List<String> getLayerNames();
 
-  View createLayer(String layerName);
+  List<LayerItem> layerItems(String layerName);
 
-  View mutateLayer(String layerName, UnaryOperator<Layer> mutator);
+  View addLayer(String layerName);
 
-  default View mutateItem(String layerName, String layerItem, UnaryOperator<LayerItem> mutator) {
-    return mutateLayer(layerName, layer -> layer.mutateItem(layerItem, mutator));
+  View removeLayer(String layerName);
+
+  View addItem(String layerName, LayerItem layerItem);
+
+  View removeItem(String layerName, String itemName);
+
+  View moveToFront(String layerName, String itemName);
+
+  View moveToBack(String layerName, String itemName);
+
+  View moveInFrontOf(String layerName, String targetItemName, String referenceItemName);
+
+  View moveBehind(String layerName, String targetItemName, String referenceItemName);
+
+  default LayerModifier createModifier(String layerName) {
+    return new LayerModifier(this, layerName);
   }
 
-  default View addItem(String layerName, LayerItem item) {
-    return mutateLayer(layerName, layer -> layer.addItem(item));
+  default Layer getLayer(String layerName) {
+    return new Layer(this, layerName);
+  }
+
+  static View create(String name) {
+    return ServiceLoader.load(ViewFactory.class)
+        .stream()
+        .map(ServiceLoader.Provider::get)
+        .filter(f -> f.getName().equals(name))
+        .findFirst().orElseThrow(() -> new NoViewFactoryImplementation(name))
+        .createView();
   }
 
   static View create() {
-    return ServiceLoader.load(ViewFactory.class)
-        .findFirst()
-        .orElseThrow(NoViewFactoryImplementation::new)
-        .createView();
+    return create("fpc");
   }
+
+
 }

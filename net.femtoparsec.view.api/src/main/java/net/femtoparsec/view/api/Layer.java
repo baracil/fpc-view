@@ -1,41 +1,17 @@
 package net.femtoparsec.view.api;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
-import java.util.function.UnaryOperator;
 
-public interface Layer {
+@RequiredArgsConstructor
+public class Layer {
 
-  String getName();
+  private final View view;
+  private final String layerName;
 
-
-  List<LayerItem> getItems();
-
-  default int getNumberOfItems() {
-    return getItems().size();
+  public List<LayerItem> layerItems() {
+    return this.view.layerItems(this.layerName);
   }
 
-  Layer mutateItem(String itemName, UnaryOperator<LayerItem> mutator);
-
-  Layer mutateDrawer(String itemName, UnaryOperator<LayerItem.Drawer> mutator);
-
-  Layer mutateLayout(String itemName, UnaryOperator<LayerItem.Layout> mutator);
-
-  Layer addItem(LayerItem item);
-
-  Layer addItem(LayerItem item, int index);
-
-  Layer removeItem(String itemName);
-
-  Layer moveToFront(String itemName);
-
-  Layer moveToBack(String itemName);
-
-  Layer moveInFrontOf(String targetItemName, String referenceItemName);
-
-  Layer moveBehindOf(String targetItemName, String referenceItemName);
-
-
-  default boolean hasName(String layerName) {
-    return getName().equals(layerName);
-  }
 }
